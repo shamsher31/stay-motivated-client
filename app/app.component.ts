@@ -1,6 +1,13 @@
 import { Component } from '@angular/core';
+
 @Component({
-  selector: 'my-app',
-  template: '<h1>Motivational Application</h1>'
+  selector: 'qoutes-app',
+  template: `
+    <p>{{title}}</p>
+    <p>{{author}}</p>`
 })
-export class AppComponent { }
+
+export class AppComponent {
+  title = 'Love what you do, Do what you love.';
+  author = 'Steve Jobs';
+} 
