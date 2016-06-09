@@ -1,24 +1,18 @@
 import { Component } from '@angular/core';
-
-export class Qoute {
-  title: string;
-  author: string;
-}
+import { Qoute } from './qoute';
+import { QouteDetailComponent } from './qoute-detail.component';
 
 @Component({
   selector: 'qoutes-app',
   template: `
-    <div *ngIf="selectedQoute">
-      <p>{{selectedQoute.title}}</p>
-      <p>{{selectedQoute.author}}</p>
-      <input [(ngModel)]="selectedQoute.author">
-    </div>
+    <qoute-detail [qoute]="selectedQoute"></qoute-detail>
     <ul>
       <li *ngFor="let qoute of qoutes" (click)="onSelect(qoute)">
         <p>{{qoute.title}}</p>
         <p>{{qoute.author}}</p>
       </li>
-    </ul>`
+    </ul>`,
+    directives: [QouteDetailComponent] 
 })
 
 export class AppComponent {
