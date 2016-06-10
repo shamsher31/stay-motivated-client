@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Qoute } from './qoute';
 import { QouteDetailComponent } from './qoute-detail.component';
+import { QouteService } from './qoute.service';
 
 @Component({
   selector: 'qoutes-app',
@@ -12,36 +13,26 @@ import { QouteDetailComponent } from './qoute-detail.component';
         <p>{{qoute.author}}</p>
       </li>
     </ul>`,
-    directives: [QouteDetailComponent] 
+    directives: [QouteDetailComponent],
+    providers: [QouteService]
 })
 
-export class AppComponent {
-  public qoutes = QOUTES;
+export class AppComponent implements OnInit {
+
+  public qoutes: Qoute[];
   selectedQoute: Qoute;
+
+  constructor(private qouteService: QouteService) {}
+
+  getQoutes() {
+    this.qouteService.getQoutes().then(qoutes => this.qoutes = qoutes);
+  }
+
+  ngOnInit() {
+    this.getQoutes();
+  }
+
   onSelect(qoute: Qoute) {
     this.selectedQoute = qoute;
   }
 }
-
-var QOUTES: Qoute[] = [
-  {
-    title: 'Love what you do, Do what you love.',
-    author: 'Steve Jobs'
-  },
-  {
-    title: 'Work hard dream big.',
-    author: 'Steve Jobs'
-  },
-  {
-    title: 'Hardwork beats talent.',
-    author: 'Steve Jobs'
-  },
-  {
-    title: 'Life id too short to wait.',
-    author: 'Steve Jobs'
-  },
-  {
-    title: 'Never stop dreaming.',
-    author: 'Steve Jobs'
-  },
-]
