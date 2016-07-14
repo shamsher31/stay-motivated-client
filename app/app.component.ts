@@ -1,38 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { Qoute } from './qoute';
-import { QouteDetailComponent } from './qoute-detail.component';
-import { QouteService } from './qoute.service';
+import { Component } from '@angular/core';
+import { QouteService} from './qoute.service';
+import { QoutesComponent} from './qoutes.component'
 
 @Component({
-  selector: 'qoutes-app',
+  selector: 'my-app',
   template: `
-    <qoute-detail [qoute]="selectedQoute"></qoute-detail>
-    <ul>
-      <li *ngFor="let qoute of qoutes" (click)="onSelect(qoute)">
-        <p>{{qoute.title}}</p>
-        <p>{{qoute.author}}</p>
-      </li>
-    </ul>`,
-    directives: [QouteDetailComponent],
-    providers: [QouteService]
+    <h3>{{title}}</h3>
+    <qoutes-app></qoutes-app>
+  `,
+  directives: [QoutesComponent],
+  providers: [QouteService]
 })
-
-export class AppComponent implements OnInit {
-
-  public qoutes: Qoute[];
-  selectedQoute: Qoute;
-
-  constructor(private qouteService: QouteService) {}
-
-  getQoutes() {
-    this.qouteService.getQoutes().then(qoutes => this.qoutes = qoutes);
-  }
-
-  ngOnInit() {
-    this.getQoutes();
-  }
-
-  onSelect(qoute: Qoute) {
-    this.selectedQoute = qoute;
-  }
+export class AppComponent {
+  title = 'List of Qoutes';
 }
