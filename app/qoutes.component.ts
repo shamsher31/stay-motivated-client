@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Qoute } from './qoute';
 import { QouteDetailComponent } from './qoute-detail.component';
 import { QouteService } from './qoute.service';
+import { ROUTER_DIRECTIVES } from '@angular/router';
 
 @Component({
   selector: 'qoutes-app',
@@ -9,11 +10,15 @@ import { QouteService } from './qoute.service';
     <qoute-detail [qoute]="selectedQoute"></qoute-detail>
     <ul>
       <li *ngFor="let qoute of qoutes" (click)="onSelect(qoute)">
-        <p>{{qoute.title}}</p>
+        <p>
+          <a routerLink="/qoutes" [queryParams]="{id: qoute.id}">
+            {{qoute.title}}
+          </a>
+        </p>
         <p>{{qoute.author}}</p>
       </li>
     </ul>`,
-    directives: [QouteDetailComponent]
+    directives: [QouteDetailComponent, ROUTER_DIRECTIVES]
 })
 
 export class QoutesComponent implements OnInit {
