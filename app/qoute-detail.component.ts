@@ -7,7 +7,6 @@ import { Qoute } from './qoute';
     <div *ngIf="qoute">
       <p>{{qoute.title}}</p>
       <p>{{qoute.author}}</p>
-      <input [(ngModel)]="qoute.author">
     </div>`
 })
 
